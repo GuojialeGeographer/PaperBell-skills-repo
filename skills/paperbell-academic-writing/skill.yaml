@@ -1,0 +1,12 @@
+id: paperbell-academic-writing
+version: 1.0.0
+title:
+  en: PaperBell academic writing
+  zh: PaperBell 学术写作
+description:
+  en: Academic writing conventions and the PaperBell 5.x CIMPO vault structure, so the agent knows where literature, concepts, projects and drafts live and how a new draft links into them.
+  zh: 学术写作规范与 PaperBell 5.x CIMPO 仓库结构：让 AI 知道文献、概念、项目、草稿各在哪里，新草稿该如何接入。
+tier: core
+requires: []
+free: true
+tags: [writing, vault, cimpo]

@@ -1,0 +1,12 @@
+id: paperbell-note-conventions
+version: 1.0.0
+title:
+  en: PaperBell note conventions
+  zh: PaperBell 笔记规范
+description:
+  en: Frontmatter and template conventions for every PaperBell 5.x note type — concept cards, inputs, scholars, institutes, grants, diaries, projects and outputs.
+  zh: PaperBell 5.x 各类笔记（概念卡、输入、学者、机构、资助、日记、项目、输出）的 frontmatter 与模板规范。
+tier: core
+requires: []
+free: true
+tags: [conventions, frontmatter, vault, cimpo]
