@@ -1,4 +1,4 @@
-# Contributing to paperbell-skills-market
+# Contributing to PaperBell-skills-repo
 
 Thanks for sharing a skill! Skills from this repo are installed into real users'
 vaults, and agents run the scripts they ship on users' machines — so every

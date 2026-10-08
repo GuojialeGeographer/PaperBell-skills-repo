@@ -1,4 +1,4 @@
-# paperbell-skills-market — 对外契约
+# PaperBell-skills-repo — 对外契约
 
 本文件定义两份 JSON 契约，市场仓（生产方）与 PaperBell 插件（消费方）都以此为准。
 改动任何字段都必须 bump 对应的 `schemaVersion`，并同步插件端的类型：
@@ -10,13 +10,13 @@
 ## 1. `index.json`（schemaVersion 1）
 
 由 `scripts/build-index.mjs --tag <tag>` 生成，作为 GitHub release 资产发布。
-客户端默认地址：`https://github.com/PaperBell-Org/paperbell-skills-market/releases/latest/download/index.json`
+客户端默认地址：`https://github.com/PaperBell-Org/PaperBell-skills-repo/releases/latest/download/index.json`
 
 ```jsonc
 {
   "schemaVersion": 1,
   "generatedAt": "2026-10-08T00:00:00.000Z",
-  "repo": "PaperBell-Org/paperbell-skills-market",
+  "repo": "PaperBell-Org/PaperBell-skills-repo",
   "tag": "0.1.0",
   "skills": [
     {
@@ -33,7 +33,7 @@
       "files": [                             // 第一项永远是 SKILL.md
         {
           "path": "SKILL.md",                // 相对 skill 安装目录，正斜杠，无 ".."
-          "url": "https://raw.githubusercontent.com/PaperBell-Org/paperbell-skills-market/0.1.0/skills/paperbell-v4-to-v5/SKILL.md",
+          "url": "https://raw.githubusercontent.com/PaperBell-Org/PaperBell-skills-repo/0.1.0/skills/paperbell-v4-to-v5/SKILL.md",
           "sha256": "<hex>",
           "size": 1234
         }

@@ -1,7 +1,7 @@
 // Shared constants. Keep AGENTS / FLAT_AGENTS in step with the plugin's
 // `AgentType` + `AGENT_TYPES[].skillFormat` (src/types/ai-skills.ts).
 
-export const REPO = 'PaperBell-Org/paperbell-skills-market';
+export const REPO = 'PaperBell-Org/PaperBell-skills-repo';
 
 export const SCHEMA_VERSION = 1;
 

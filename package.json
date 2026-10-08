@@ -1,5 +1,5 @@
 {
-  "name": "paperbell-skills-market",
+  "name": "paperbell-skills-repo",
   "version": "0.0.0",
   "description": "Agent skills for PaperBell (Obsidian): academic writing, vault conventions, manuscript formatting, vault migration. Consumed by the PaperBell plugin via index.json and usable as a Claude Code plugin marketplace.",
   "type": "module",

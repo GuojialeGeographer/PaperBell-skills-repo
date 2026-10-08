@@ -1,4 +1,4 @@
-# paperbell-skills-market
+# PaperBell-skills-repo
 
 PaperBell 的 **AI 技能（Agent Skills）市场**：学术写作、仓库笔记规范、稿件格式、v4 → v5 迁移等技能的唯一来源。
 
@@ -6,7 +6,7 @@ PaperBell 的 **AI 技能（Agent Skills）市场**：学术写作、仓库笔�
 - **Claude Code** 用户也可以直接把本仓库当插件市场用：
 
   ```
-  /plugin marketplace add PaperBell-Org/paperbell-skills-market
+  /plugin marketplace add PaperBell-Org/PaperBell-skills-repo
   /plugin install manuscript-formatting@paperbell-skills
   ```
 
@@ -85,7 +85,7 @@ node scripts/build-index.mjs --tag 0.1.0 --out dist/index.json
 
 推送 `X.Y.Z`（或预发布 `X.Y.Z-rc.1`）tag 即触发 `release.yml`：校验 → 构建 `dist/index.json`（所有文件 URL 钉在该 tag 上）→ 创建 GitHub release 并附上 `index.json`。带 `-` 的 tag 是 prerelease，不会成为 `releases/latest`。
 
-客户端默认地址：`https://github.com/PaperBell-Org/paperbell-skills-market/releases/latest/download/index.json`
+客户端默认地址：`https://github.com/PaperBell-Org/PaperBell-skills-repo/releases/latest/download/index.json`
 
 ## 来源与许可
 
@@ -100,7 +100,7 @@ node scripts/build-index.mjs --tag 0.1.0 --out dist/index.json
     --path-rename scripts/:shared/scripts/ \
     --path-rename profiles/:shared/profiles/ \
     --path-rename tests/:test/python/
-  cd ../paperbell-skills-market
+  cd ../PaperBell-skills-repo
   git remote add fmt ../fmt && git fetch fmt
   git merge --allow-unrelated-histories -s ours fmt/decouple-and-split-by-element   # 只接历史，保留当前树
   ```
@@ -115,7 +115,7 @@ The agent-skills market for **PaperBell** (Obsidian). Each release publishes an
 `index.json` (schemaVersion 1, see [`docs/CONTRACT.md`](docs/CONTRACT.md)) that
 the PaperBell plugin reads to install skills for the user's agent. The repo is
 also a Claude Code plugin marketplace:
-`/plugin marketplace add PaperBell-Org/paperbell-skills-market`.
+`/plugin marketplace add PaperBell-Org/PaperBell-skills-repo`.
 
 - A skill is `skills/<id>/SKILL.md` + `skill.yaml` (+ optional resources).
   Resources shared by several skills live once in `shared/`, are declared via
