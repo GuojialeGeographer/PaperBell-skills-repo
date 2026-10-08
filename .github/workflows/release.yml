@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+      - "[0-9]+.[0-9]+.[0-9]+-*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "20.x"
+          cache: "npm"
+      - run: npm ci
+
+      - name: Versions are semver (independent of the tag)
+        run: node scripts/check-versions.mjs
+
+      - name: Validate (strict)
+        run: node scripts/validate.mjs
+
+      - name: Security scan
+        run: node scripts/scan-security.mjs
+
+      - name: Unit tests
+        run: npm test
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Python tests (stdlib only; skipped when none exist)
+        run: node scripts/run-python-tests.mjs
+
+      # Every file URL in index.json is pinned to this tag
+      # (raw.githubusercontent.com/<repo>/<tag>/...), so the tag must point at
+      # exactly the tree that was validated above.
+      - name: Build index.json
+        run: node scripts/build-index.mjs --tag "${GITHUB_REF_NAME}" --out dist/index.json
+
+      # A tag with a "-" (e.g. 0.2.0-rc.1) is a prerelease, so it never becomes
+      # .../releases/latest/download/index.json — the client's default URL.
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          if [[ "$tag" == *-* ]]; then pre="--prerelease"; else pre="--latest"; fi
+          gh release create "$tag" \
+            --title "$tag" \
+            --notes "Skills market release $tag. Clients read dist/index.json (schemaVersion 1)." \
+            $pre \
+            dist/index.json

@@ -1,0 +1,25 @@
+{
+  "name": "paperbell-skills-market",
+  "version": "0.0.0",
+  "description": "Agent skills for PaperBell (Obsidian): academic writing, vault conventions, manuscript formatting, vault migration. Consumed by the PaperBell plugin via index.json and usable as a Claude Code plugin marketplace.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "build:index": "node scripts/build-index.mjs",
+    "check:versions": "node scripts/check-versions.mjs",
+    "scan:security": "node scripts/scan-security.mjs",
+    "check:pr-scope": "node scripts/check-pr-scope.mjs",
+    "sync": "node scripts/sync-shared.mjs && node scripts/sync-marketplace.mjs",
+    "sync:check": "node scripts/sync-shared.mjs --check && node scripts/sync-marketplace.mjs --check",
+    "test": "node scripts/run-tests.mjs",
+    "test:python": "node scripts/run-python-tests.mjs"
+  },
+  "dependencies": {
+    "yaml": "^2.5.0"
+  }
+}
