@@ -1,0 +1,161 @@
+{
+  "name": "paperbell-skills",
+  "owner": {
+    "name": "PaperBell-Org"
+  },
+  "metadata": {
+    "description": "PaperBell agent skills: academic writing, vault conventions, manuscript formatting and vault migration. Generated from skills/*/skill.yaml by scripts/sync-marketplace.mjs — do not edit by hand."
+  },
+  "plugins": [
+    {
+      "name": "paperbell",
+      "source": "./",
+      "description": "Write a manuscript in the PaperBell Markdown → Pandoc → xelatex export conventions, or convert an existing markdown document to them. Encoding only — never changes what the document says.",
+      "version": "1.0.0",
+      "author": {
+        "name": "PaperBell-Org"
+      },
+      "homepage": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "repository": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "license": "MIT",
+      "keywords": [
+        "formatting",
+        "pandoc",
+        "manuscript",
+        "xelatex"
+      ],
+      "strict": false,
+      "skills": [
+        "./skills/paperbell"
+      ]
+    },
+    {
+      "name": "paperbell-academic-writing",
+      "source": "./",
+      "description": "Academic writing conventions and the PaperBell 5.x CIMPO vault structure, so the agent knows where literature, concepts, projects and drafts live and how a new draft links into them.",
+      "version": "1.0.0",
+      "author": {
+        "name": "PaperBell-Org"
+      },
+      "homepage": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "repository": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "license": "MIT",
+      "keywords": [
+        "writing",
+        "vault",
+        "cimpo"
+      ],
+      "strict": false,
+      "skills": [
+        "./skills/paperbell-academic-writing"
+      ]
+    },
+    {
+      "name": "paperbell-note-conventions",
+      "source": "./",
+      "description": "Frontmatter and template conventions for every PaperBell 5.x note type — concept cards, inputs, scholars, institutes, grants, diaries, projects and outputs.",
+      "version": "1.0.0",
+      "author": {
+        "name": "PaperBell-Org"
+      },
+      "homepage": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "repository": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "license": "MIT",
+      "keywords": [
+        "conventions",
+        "frontmatter",
+        "vault",
+        "cimpo"
+      ],
+      "strict": false,
+      "skills": [
+        "./skills/paperbell-note-conventions"
+      ]
+    },
+    {
+      "name": "paperbell-v4-to-v5",
+      "source": "./",
+      "description": "Plans the move of a PaperBell 4.x vault onto the 5.x CIMPO layout (10 Cards / 20 Inputs / 30 Metadata / 40 Projects / 50 Outputs), hands the plan to the PaperBell plugin to execute with link updates, then walks you through the judgment calls and verifies the result.",
+      "version": "1.0.0",
+      "author": {
+        "name": "PaperBell-Org"
+      },
+      "homepage": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "repository": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "license": "MIT",
+      "keywords": [
+        "migration",
+        "cimpo"
+      ],
+      "strict": false,
+      "skills": [
+        "./skills/paperbell-v4-to-v5"
+      ]
+    },
+    {
+      "name": "tables-to-workbook",
+      "source": "./",
+      "description": "Put every table a manuscript needs into the project's one spreadsheet workbook — one sheet per table, registered with the source of its numbers — and leave only an xlsx-table pointer in the prose.",
+      "version": "1.0.0",
+      "author": {
+        "name": "PaperBell-Org"
+      },
+      "homepage": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "repository": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "license": "MIT",
+      "keywords": [
+        "formatting",
+        "tables",
+        "xlsx",
+        "manuscript"
+      ],
+      "strict": false,
+      "skills": [
+        "./skills/tables-to-workbook"
+      ]
+    },
+    {
+      "name": "track-changes",
+      "source": "./",
+      "description": "Write review findings into a markdown draft as CriticMarkup beside the sentence they concern, and process the author's replies — without rewriting the author's prose.",
+      "version": "1.0.0",
+      "author": {
+        "name": "PaperBell-Org"
+      },
+      "homepage": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "repository": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "license": "MIT",
+      "keywords": [
+        "review",
+        "criticmarkup",
+        "annotations",
+        "manuscript"
+      ],
+      "strict": false,
+      "skills": [
+        "./skills/track-changes"
+      ]
+    },
+    {
+      "name": "manuscript-formatting",
+      "source": "./",
+      "description": "The carrier layer for a PaperBell manuscript — export conventions, the one-workbook table discipline, and CriticMarkup review annotations that never survive to export.",
+      "version": "1.0.0",
+      "author": {
+        "name": "PaperBell-Org"
+      },
+      "homepage": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "repository": "https://github.com/PaperBell-Org/paperbell-skills-market",
+      "license": "MIT",
+      "keywords": [
+        "bundle"
+      ],
+      "strict": false,
+      "skills": [
+        "./skills/paperbell",
+        "./skills/tables-to-workbook",
+        "./skills/track-changes"
+      ]
+    }
+  ]
+}
