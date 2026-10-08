@@ -1,0 +1,14 @@
+id: tables-to-workbook
+version: 1.0.0
+title:
+  en: Tables to workbook
+  zh: 表格进工作簿
+description:
+  en: Put every table a manuscript needs into the project's one spreadsheet workbook — one sheet per table, registered with the source of its numbers — and leave only an xlsx-table pointer in the prose.
+  zh: 把稿件里的每张表放进项目唯一的 xlsx 工作簿（一表一 sheet，并登记数字来源），正文只留一个 xlsx-table 指针。
+tier: core
+agents: [claude-code, github-copilot, openai-codex, gemini-cli]
+requires: []
+shared: [LICENSE, profiles, references, scripts]
+free: false
+tags: [formatting, tables, xlsx, manuscript]

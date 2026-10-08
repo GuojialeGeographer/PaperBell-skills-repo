@@ -1,0 +1,14 @@
+id: track-changes
+version: 1.0.0
+title:
+  en: Track changes (CriticMarkup)
+  zh: 修订批注（CriticMarkup）
+description:
+  en: Write review findings into a markdown draft as CriticMarkup beside the sentence they concern, and process the author's replies — without rewriting the author's prose.
+  zh: 把审阅意见以 CriticMarkup 写进 markdown 草稿、紧贴相关句子，并处理作者的回复；绝不改写作者原文。
+tier: core
+agents: [claude-code, github-copilot, openai-codex, gemini-cli]
+requires: []
+shared: [LICENSE, references, scripts]
+free: false
+tags: [review, criticmarkup, annotations, manuscript]

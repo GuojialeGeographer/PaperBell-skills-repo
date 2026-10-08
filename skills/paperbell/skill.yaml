@@ -1,0 +1,14 @@
+id: paperbell
+version: 1.0.0
+title:
+  en: PaperBell manuscript formatting
+  zh: PaperBell 稿件格式规范
+description:
+  en: Write a manuscript in the PaperBell Markdown → Pandoc → xelatex export conventions, or convert an existing markdown document to them. Encoding only — never changes what the document says.
+  zh: 按 PaperBell 的 Markdown → Pandoc → xelatex 导出规范写稿，或把已有 markdown 文档转换过来。只管"怎么写下来"，不改动文档内容。
+tier: core
+agents: [claude-code, github-copilot, openai-codex, gemini-cli]
+requires: []
+shared: [LICENSE, profiles, references, scripts]
+free: false
+tags: [formatting, pandoc, manuscript, xelatex]

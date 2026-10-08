@@ -1,0 +1,9 @@
+id: manuscript-formatting
+version: 1.0.0
+title:
+  en: Manuscript formatting
+  zh: 稿件格式套装
+description:
+  en: The carrier layer for a PaperBell manuscript — export conventions, the one-workbook table discipline, and CriticMarkup review annotations that never survive to export.
+  zh: PaperBell 稿件的"载体层"：导出规范、单一工作簿的表格纪律，以及导出前必须清掉的 CriticMarkup 审阅批注。
+skills: [paperbell, tables-to-workbook, track-changes]
