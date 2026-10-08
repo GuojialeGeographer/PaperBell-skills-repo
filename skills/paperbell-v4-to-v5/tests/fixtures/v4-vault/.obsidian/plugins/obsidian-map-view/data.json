@@ -1,0 +1,5 @@
+{
+  "markerIconRules": [
+    { "query": "tag:#university", "preset": false, "iconDetails": { "prefix": "fas", "icon": "fa-university" } }
+  ]
+}

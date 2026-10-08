@@ -1,0 +1,10 @@
+{
+  "dailyNotePath": "00 - 每日日记",
+  "reviewSettings": {
+    "PaperBell": { "reviewedTaskIds": ["Projects/PaperBell.md-L24", "00 - 每日日记/DailyNote/2025年06月30日.md-L15"] }
+  },
+  "viewConfiguration": [ { "id": "projects", "name": "Projects" } ],
+  "enhancedProjectData": {
+    "fileProjectMap": { "Projects/ABSESpy.md": { "project": "ABSESpy", "source": "Projects/ABSESpy.md" } }
+  }
+}

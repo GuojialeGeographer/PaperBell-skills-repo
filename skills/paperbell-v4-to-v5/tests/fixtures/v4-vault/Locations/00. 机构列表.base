@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.inFolder("Locations/Institutes")
+views:
+  - type: table
+    name: 机构

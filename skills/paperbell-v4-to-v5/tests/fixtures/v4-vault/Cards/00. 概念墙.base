@@ -1,0 +1,7 @@
+filters:
+  and:
+    - file.inFolder("Cards/Concepts")
+    - '!file.name.startsWith("00.")'
+views:
+  - type: cards
+    name: 概念墙
