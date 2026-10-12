@@ -33,7 +33,7 @@
       "name": "paperbell-academic-writing",
       "source": "./",
       "description": "Academic writing conventions and the PaperBell 5.x CIMPO vault structure, so the agent knows where literature, concepts, projects and drafts live and how a new draft links into them.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "PaperBell-Org"
       },
@@ -73,7 +73,7 @@
       "name": "paperbell-note-conventions",
       "source": "./",
       "description": "Frontmatter and template conventions for every PaperBell 5.x note type — concept cards, inputs, scholars, institutes, grants, diaries, projects and outputs.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "PaperBell-Org"
       },

@@ -45,6 +45,11 @@ Inputs Bell normalises every new input: it fills `input_type`
 (fill-only), localises images into `20 - Inputs/_assets/`, and files the note by
 its frontmatter. Do not add `concepts:` to inputs.
 
+Notes migrated from PaperBell 4.x are the exception: a literature note may
+still carry its old `concepts:` list (topics mixed with reading status and
+star marks) next to `keywords`. Leave that list as it is — do not strip it,
+rename it, or keep it in sync with `keywords`.
+
 **Literature** · `20 - Inputs/Zotero/` (ZotLit, template `zt-*.eta.md`)
 
 ```yaml
@@ -118,7 +123,9 @@ abstract: "…"
 banner: 40 - Projects/<name>/cover.jpg
 ```
 
-Do not use the legacy `status` / `phase` fields — `stage` replaces both.
+Do not use the legacy `status` / `phase` fields on new projects — `stage`
+replaces both. On a project migrated from 4.x, leave an existing `status` in
+place unless the user asks to remove it.
 Milestones are Markdown tasks tagged `#milestone #project/<acronym>`;
 `[-]` (cancelled) is removed from the progress denominator. Any note or task
 tagged `#project/<acronym>` belongs to the project. Deliverables and grants are

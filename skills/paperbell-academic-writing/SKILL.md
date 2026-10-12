@@ -90,5 +90,7 @@ line and figure numbers).
   managed by plugins and overwritten on update).
 - Add `concepts:` to input notes, or `keywords` to drafts in place of
   `concepts:`.
+- Remove a `concepts:` list that a literature note already carries from
+  PaperBell 4.x — migrated notes keep it alongside `keywords`.
 - Put people, institutions or dates into `10 - Cards/`.
 - Move or rename project folders: the home note must keep the folder's name.
