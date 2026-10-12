@@ -181,10 +181,10 @@ milestones:
 ```
 
 ```markdown
-- [x] v1 框架搭建 #project/PaperBell #milestone 📅 2023-09-01 （旧记录：progress: 100；endDate: 2025-12-11）
+- [x] v1 框架搭建（旧记录：progress: 100） #project/PaperBell #milestone 🛫 2023-09-01 📅 2025-12-11
 ```
 
-done 决定复选框，不能只看 progress。旧项目 status 与里程碑不一致时记录矛盾，不自动替用户判断。所有任务核对后才移除旧 milestones 字段；其他 frontmatter 不随之删除。新版示例多出来的任务不自动算个人任务。
+done 决定复选框，不能只看 progress。有 endDate 时旧 date 是开始日（🛫）、endDate 是截止日（📅）；没有 endDate 时只写 `📅 date`。附注放在标签前，日期保持在行尾。旧项目 status 与里程碑不一致时记录矛盾，不自动替用户判断。所有任务核对后才移除旧 milestones 字段；其他 frontmatter 不随之删除。新版示例多出来的任务不自动算个人任务。
 
 ## 六、Longform 完整转换实例
 
@@ -193,12 +193,12 @@ done 决定复选框，不能只看 progress。旧项目 status 与里程碑不�
 1. 复制整个旧写作项目到新 Longform 下自己的独立目录，保留改前副本。
 2. `Index.md → Main Manuscript (Index).md`；`source → manuscript`。
 3. 将原 imgs 中使用的图片合并进 figs；同名同哈希复用，不同哈希先决定新名，不能直接覆盖。
-4. 索引 sceneFolder 改 manuscript，sceneTemplate 改新版路径，保留原 scenes 顺序。
+4. 索引 sceneFolder 改 manuscript，sceneTemplate 改新版路径，保留原 scenes 顺序。各章开头补 `# 章节名`（取 scene_alias），正文标题从 `###` 起的整体上提到从 `##` 起，代码块内的 `#` 行不动；新版工作流不再注入章节标题。
 5. 建 metadata.json 并核对作者关系，再将 workflow 改 PaperBell Manuscript。
 6. 查旧索引/章节/图片路径，修实际链接。选中新索引或仅修改 selectedDraftVaultPath。
 7. 逐个打开场景和图片，确认历史 PDF/Word 没被覆盖，后续导出使用不冲突的输出名。
 
-例如，旧引言的 `](organizing.png)` 最终改为 `](../figs/organizing.png)`；`](formatting.png)` 最终改为 `](../figs/formatting.png)`。图片统一到 figs 后，不应继续指向旧 imgs 目录。
+新版示例稿的章节直接写文件名，例如 `](organizing.png)`：导出器会把项目目录和 `figs/` 加入资源路径。所以图片已在 figs 且原文是裸文件名时不必改；原文写 `](imgs/x.png)` 这类旧子目录时改为 `](x.png)`（或 `](../figs/x.png)`）。图片统一到 figs 后，不应继续指向旧 imgs 目录。
 
 ### 6.2 metadata.json 可填写模板
 
@@ -232,7 +232,7 @@ done 决定复选框，不能只看 progress。旧项目 status 与里程碑不�
 
 迁移后检查：creators 数量与顺序等于旧 authors；数字机构编号映射成真实名称列表；对应关系没有反转；corresponding 名称与 creators.name 完全一致；邮箱来自原文；日期仍是原日期，不能自动换成迁移当天。
 
-`false` 是 JSON 布尔值，不是字符串 `"false"`。extra_yaml 是一个字符串，里面换行写 `\n`；JSON 不允许尾逗号和注释。使用项目字体覆盖时，追加实际安装字体对应的 CJKmainfont 等 YAML 字段；不要盲抄 Mac 字体或 Windows 字体。
+`_longform` 里的 csl、template、lineno、figures_at_end 会在用元数据面板保存时被删除；lineno、figures-at-end 要长期保留就以 extra_yaml 为准。`false` 是 JSON 布尔值，不是字符串 `"false"`。extra_yaml 是一个字符串，里面换行写 `\n`；JSON 不允许尾逗号和注释。使用项目字体覆盖时，追加实际安装字体对应的 CJKmainfont 等 YAML 字段；不要盲抄 Mac 字体或 Windows 字体。
 
 移除旧索引中已转换的 authors、affiliations、abstract 等出版配置，避免维护两套；索引 title 等用于显示的属性可保留。原索引全文备份于库外。只把新使用说明放进新版索引时，确保个人正文也有明确保留去向，不能把所有 Index 正文当可丢弃说明。
 

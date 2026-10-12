@@ -1,5 +1,5 @@
 id: paperbell-migrate
-version: 1.0.0
+version: 1.1.0
 title:
   en: Migrate PaperBell 4.6.1 notes into 5.0.3, step by step
   zh: PaperBell 分步迁移（4.6.1 → 5.0.3）

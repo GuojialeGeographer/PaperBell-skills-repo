@@ -44,13 +44,29 @@ class TargetFor(unittest.TestCase):
         self.assertEqual(inventory.target_for("Projects/ABSESpy.md"), "40 - Projects/ABSESpy/ABSESpy.md")
         self.assertEqual(inventory.target_for("Projects/ABSESpy/cover.png"), "40 - Projects/ABSESpy/cover.png")
 
-    def test_longform_demo_renames(self):
-        self.assertEqual(inventory.target_for("Outputs/demo/Index.md"),
-                         "50 - Outputs/Longform/demo/Main Manuscript (Index).md")
-        self.assertEqual(inventory.target_for("Outputs/demo/source/1.md"),
-                         "50 - Outputs/Longform/demo/manuscript/1.md")
-        self.assertEqual(inventory.target_for("Outputs/demo/imgs/a.png"),
-                         "50 - Outputs/Longform/demo/figs/a.png")
+    def test_longform_project_renames(self):
+        projects = inventory.longform_projects(
+            ["Outputs/MyPaper/Index.md", "Outputs/MyPaper/source/1.md", "Outputs/loose.md",
+             "Outputs/Notes/a.md", "Outputs/Deep/x/Index.md"])
+        self.assertEqual(projects, {"MyPaper"})
+        cases = {
+            "Outputs/MyPaper/Index.md": "50 - Outputs/Longform/MyPaper/Main Manuscript (Index).md",
+            "Outputs/MyPaper/source/1.md": "50 - Outputs/Longform/MyPaper/manuscript/1.md",
+            "Outputs/MyPaper/imgs/a.png": "50 - Outputs/Longform/MyPaper/figs/a.png",
+            "Outputs/MyPaper/figs/b.png": "50 - Outputs/Longform/MyPaper/figs/b.png",
+            "Outputs/MyPaper/old.pdf": "50 - Outputs/Longform/MyPaper/old.pdf",
+        }
+        for old, new in cases.items():
+            with self.subTest(old=old):
+                self.assertEqual(inventory.target_for(old, projects), new)
+        # an Outputs folder without its own Index.md is not assumed to be Longform
+        self.assertIsNone(inventory.target_for("Outputs/Notes/a.md", projects))
+
+    def test_deferred_and_technical_files_get_no_destination(self):
+        for old in ("Inputs/Links/link.md", "Locations/Places/place.md",
+                    "Projects/.DS_Store", "Inputs/Zotero/.DS_Store", ".Rhistory"):
+            with self.subTest(old=old):
+                self.assertIsNone(inventory.target_for(old))
 
     def test_unknown_folder_has_no_guessed_destination(self):
         self.assertIsNone(inventory.target_for("MyStuff/note.md"))
@@ -76,6 +92,9 @@ class VaultPair:
         write(self.old, "40 - Obsidian/模板/t.md")
         write(self.old, "Cards/list.base")
         write(self.old, "MyStuff/note.md")
+        write(self.old, "Projects/.DS_Store")
+        write(self.old, "Outputs/MyPaper/Index.md")
+        write(self.old, "Outputs/MyPaper/source/1.md")
         write(self.new, "20 - Inputs/Books/same.md", "same")
         write(self.new, "20 - Inputs/Books/changed.md", "new")
         write(self.new, "30 - Metadata/Scholars/only-new.md")
@@ -91,7 +110,7 @@ class Compare(VaultPair, unittest.TestCase):
 
     def test_comparison_and_actions(self):
         report, rows = self.rows()
-        self.assertEqual(report["source_files"], 8)
+        self.assertEqual(report["source_files"], 11)
         self.assertEqual(rows["Inputs/Books/same.md"]["comparison"], "identical")
         self.assertEqual(rows["Inputs/Books/same.md"]["proposed_action"], "reuse_new_identical_file")
         self.assertEqual(rows["Inputs/Books/changed.md"]["comparison"], "different")
@@ -106,6 +125,27 @@ class Compare(VaultPair, unittest.TestCase):
         _, rows = self.rows()
         for source in ("Inputs/Links/link.md", "Locations/Places/place.md"):
             self.assertEqual(rows[source]["proposed_action"], "defer_for_user_choice")
+            self.assertIsNone(rows[source]["proposed_target"])
+
+    def test_longform_project_is_detected_from_its_index(self):
+        report, rows = self.rows()
+        self.assertEqual(report["longform_projects"], ["MyPaper"])
+        self.assertEqual(rows["Outputs/MyPaper/source/1.md"]["proposed_target"],
+                         "50 - Outputs/Longform/MyPaper/manuscript/1.md")
+
+    def test_two_sources_proposed_for_one_target_are_flagged(self):
+        self.assertEqual(self.rows()[0]["target_collisions"], [])
+        write(self.old, "Outputs/MyPaper/imgs/a.png", "one")
+        write(self.old, "Outputs/MyPaper/figs/a.png", "two")
+        self.assertEqual(self.rows()[0]["target_collisions"],
+                         ["50 - Outputs/Longform/MyPaper/figs/a.png"])
+
+    def test_personal_summary_leaves_out_system_and_technical_files(self):
+        report, rows = self.rows()
+        self.assertEqual(rows["Projects/.DS_Store"]["proposed_action"], "retain_source_technical_file")
+        self.assertEqual(sum(report["summary"].values()), 11)
+        # 11 files minus the template, the .base and the .DS_Store
+        self.assertEqual(sum(report["personal_summary"].values()), 8)
 
     def test_old_system_files_are_not_imported(self):
         _, rows = self.rows()
@@ -128,8 +168,8 @@ class Cli(VaultPair, unittest.TestCase):
         result = self.run_cli(self.old, self.new, "--output", output)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual((snapshot(self.old), snapshot(self.new)), before)
-        self.assertEqual(json.loads(output.read_text(encoding="utf-8"))["source_files"], 8)
-        self.assertEqual(json.loads(result.stdout)["source_files"], 8)
+        self.assertEqual(json.loads(output.read_text(encoding="utf-8"))["source_files"], 11)
+        self.assertEqual(json.loads(result.stdout)["source_files"], 11)
 
     def assert_refused(self, result, fragment):
         # argparse's parser.error exits 2; a traceback would exit 1

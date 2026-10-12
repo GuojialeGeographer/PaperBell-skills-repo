@@ -54,7 +54,7 @@
       "name": "paperbell-migrate",
       "source": "./",
       "description": "Copies your personal notes from a PaperBell 4.6.1 vault into a 5.0.3 vault one folder at a time, after verifying a full backup of the old vault. The old vault stays read-only, the new vault keeps its defaults, every step is verified and recorded outside both vaults, and unmatched content is listed for you to decide.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "PaperBell-Org"
       },

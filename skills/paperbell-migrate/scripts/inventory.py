@@ -15,15 +15,24 @@ PREFIXES = [
     ("Persons/Scholars/", "30 - Metadata/Scholars/"),
     ("Persons/", "30 - Metadata/"),
     ("Locations/Institutes/", "30 - Metadata/Institutes/"),
-    ("Locations/Places/", "30 - Metadata/Places/"),
     ("Locations/", "30 - Metadata/"),
     ("Cards/", "10 - Cards/"),
     ("Inputs/", "20 - Inputs/"),
     ("Drafts/", "50 - Outputs/Drafts/"),
     ("Projects/", "40 - Projects/"),
-    ("Outputs/demo/", "50 - Outputs/Longform/demo/"),
     ("Outputs/PaperBell用户文档/", "50 - Outputs/Longform/PaperBell用户文档/"),
 ]
+
+DEFERRED = ("Inputs/Links/", "Locations/Places/")  # destination is the user's call
+TECHNICAL = (".DS_Store", ".Rhistory")
+SYSTEM_ACTIONS = ("keep_new_defaults_retain_old_system_file", "retain_source_technical_file")
+LONGFORM_RENAMES = [("source/", "manuscript/"), ("imgs/", "figs/")]
+
+
+def longform_projects(paths):
+    """Old writing projects: an Outputs/<name>/ folder with its own Index.md."""
+    return {p.split("/")[1] for p in paths
+            if p.startswith("Outputs/") and p.count("/") == 2 and p.endswith("/Index.md")}
 
 
 def inventory(root):
@@ -37,16 +46,19 @@ def inventory(root):
     return result
 
 
-def target_for(relative):
+def target_for(relative, projects=()):
+    if Path(relative).name in TECHNICAL or relative.startswith(DEFERRED):
+        return None  # No destination is proposed for these.
     if relative.startswith("Projects/") and relative.count("/") == 1 and relative.endswith(".md"):
         name = Path(relative).stem
         return f"40 - Projects/{name}/{name}.md"
-    if relative == "Outputs/demo/Index.md":
-        return "50 - Outputs/Longform/demo/Main Manuscript (Index).md"
-    if relative.startswith("Outputs/demo/source/"):
-        return "50 - Outputs/Longform/demo/manuscript/" + relative[len("Outputs/demo/source/"):]
-    if relative.startswith("Outputs/demo/imgs/"):
-        return "50 - Outputs/Longform/demo/figs/" + relative[len("Outputs/demo/imgs/"):]
+    parts = relative.split("/", 2)
+    if len(parts) == 3 and parts[0] == "Outputs" and parts[1] in projects:
+        rest = "Main Manuscript (Index).md" if parts[2] == "Index.md" else parts[2]
+        for old, new in LONGFORM_RENAMES:
+            if rest.startswith(old):
+                rest = new + rest[len(old):]
+        return f"50 - Outputs/Longform/{parts[1]}/{rest}"
     for old, new in PREFIXES:
         if relative.startswith(old):
             return new + relative[len(old):]
@@ -58,20 +70,21 @@ def target_for(relative):
 def compare(source, target):
     old = inventory(source)
     new = inventory(target)
+    projects = longform_projects(old)
     rows = []
     matched = set()
     for relative, before in old.items():
-        destination = target_for(relative)
+        destination = target_for(relative, projects)
         after = new.get(destination)
         status = "unassigned" if destination is None else "missing"
         if after is not None:
             matched.add(destination)
             status = "identical" if before == after else "different"
-        if relative.startswith(("Inputs/Links/", "Locations/Places/")):
+        if relative.startswith(DEFERRED):
             action = "defer_for_user_choice"
         elif relative.startswith((".obsidian/", ".pandoc/", "40 - Obsidian/模板/", "40 - Obsidian/脚本/", "Outputs/PaperBell用户文档/")) or relative in ("README.md", "longform-sessions.json") or relative.endswith(".base"):
             action = "keep_new_defaults_retain_old_system_file"
-        elif Path(relative).name in (".DS_Store", ".Rhistory"):
+        elif Path(relative).name in TECHNICAL:
             action = "retain_source_technical_file"
         elif status == "identical":
             action = "reuse_new_identical_file"
@@ -84,9 +97,15 @@ def compare(source, target):
                      "comparison": status, "proposed_action": action,
                      "migration_status": "planned", "source_metadata": before,
                      "target_metadata": after, "other_same_name_candidates": candidates})
+    targets = Counter(r["proposed_target"] for r in rows if r["proposed_target"])
+    collisions = sorted(t for t, n in targets.items() if n > 1)  # e.g. imgs/x and figs/x
     return {"source_vault": str(source), "new_base_vault": str(target),
             "source_files": len(old), "new_files": len(new),
             "summary": dict(Counter(r["comparison"] for r in rows)),
+            "personal_summary": dict(Counter(r["comparison"] for r in rows
+                                             if r["proposed_action"] not in SYSTEM_ACTIONS)),
+            "longform_projects": sorted(projects),
+            "target_collisions": collisions,
             "mapping_note": "Proposed destinations are comparison hints, not permission to copy or overwrite.",
             "files": rows,
             "new_files_without_mapped_old_file": sorted(set(new) - matched)}
@@ -114,7 +133,7 @@ def main():
     if args.output:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(rendered, encoding="utf-8")
-        print(json.dumps({k: report[k] for k in ("source_files", "new_files", "summary")}))
+        print(json.dumps({k: report[k] for k in ("source_files", "new_files", "summary", "personal_summary")}))
     else:
         print(json.dumps(report, ensure_ascii=True, indent=2))
 
