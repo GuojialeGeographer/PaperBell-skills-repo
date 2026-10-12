@@ -1,6 +1,0 @@
-filters:
-  and:
-    - file.path.startsWith("Persons/Scholars")
-views:
-  - type: cards
-    name: 学者列表

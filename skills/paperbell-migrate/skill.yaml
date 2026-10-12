@@ -1,0 +1,14 @@
+id: paperbell-migrate
+version: 1.0.0
+title:
+  en: Migrate PaperBell 4.6.1 notes into 5.0.3, step by step
+  zh: PaperBell 分步迁移（4.6.1 → 5.0.3）
+description:
+  en: Copies your personal notes from a PaperBell 4.6.1 vault into a 5.0.3 vault one folder at a time, after verifying a full backup of the old vault. The old vault stays read-only, the new vault keeps its defaults, every step is verified and recorded outside both vaults, and unmatched content is listed for you to decide.
+  zh: 先核验旧库完整备份，再把 PaperBell 4.6.1 的个人笔记逐文件夹迁入 5.0.3 库。旧库只读、复制不剪切，新版默认插件、模板与预设保留；同步适配字段、Base、项目和 Longform 结构，每步验证并在两库之外留记录，没有明确去向的内容列清单由你选择。
+tier: core
+agents: [claude-code, github-copilot, openai-codex, gemini-cli]
+requires: []
+free: true
+tags: [migration]
+readme: README.md

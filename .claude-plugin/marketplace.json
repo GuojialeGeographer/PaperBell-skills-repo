@@ -51,6 +51,25 @@
       ]
     },
     {
+      "name": "paperbell-migrate",
+      "source": "./",
+      "description": "Copies your personal notes from a PaperBell 4.6.1 vault into a 5.0.3 vault one folder at a time, after verifying a full backup of the old vault. The old vault stays read-only, the new vault keeps its defaults, every step is verified and recorded outside both vaults, and unmatched content is listed for you to decide.",
+      "version": "1.0.0",
+      "author": {
+        "name": "PaperBell-Org"
+      },
+      "homepage": "https://github.com/PaperBell-Org/PaperBell-skills-repo",
+      "repository": "https://github.com/PaperBell-Org/PaperBell-skills-repo",
+      "license": "MIT",
+      "keywords": [
+        "migration"
+      ],
+      "strict": false,
+      "skills": [
+        "./skills/paperbell-migrate"
+      ]
+    },
+    {
       "name": "paperbell-note-conventions",
       "source": "./",
       "description": "Frontmatter and template conventions for every PaperBell 5.x note type — concept cards, inputs, scholars, institutes, grants, diaries, projects and outputs.",
@@ -70,26 +89,6 @@
       "strict": false,
       "skills": [
         "./skills/paperbell-note-conventions"
-      ]
-    },
-    {
-      "name": "paperbell-v4-to-v5",
-      "source": "./",
-      "description": "Plans the move of a PaperBell 4.x vault onto the 5.x CIMPO layout (10 Cards / 20 Inputs / 30 Metadata / 40 Projects / 50 Outputs), hands the plan to the PaperBell plugin to execute with link updates, then walks you through the judgment calls and verifies the result.",
-      "version": "1.0.0",
-      "author": {
-        "name": "PaperBell-Org"
-      },
-      "homepage": "https://github.com/PaperBell-Org/PaperBell-skills-repo",
-      "repository": "https://github.com/PaperBell-Org/PaperBell-skills-repo",
-      "license": "MIT",
-      "keywords": [
-        "migration",
-        "cimpo"
-      ],
-      "strict": false,
-      "skills": [
-        "./skills/paperbell-v4-to-v5"
       ]
     },
     {

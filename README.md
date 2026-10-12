@@ -1,6 +1,6 @@
 # PaperBell-skills-repo
 
-PaperBell 的 **AI 技能（Agent Skills）市场**：学术写作、仓库笔记规范、稿件格式、v4 → v5 迁移等技能的唯一来源。
+PaperBell 的 **AI 技能（Agent Skills）市场**：学术写作、仓库笔记规范、稿件格式、4.6.1 → 5.0.3 迁移等技能的唯一来源。
 
 - **PaperBell 插件**（消费方）读取每次 release 附带的 `index.json`，按用户选择的 agent（Claude Code / Copilot / Codex / Gemini CLI / Cursor / Windsurf / Cline）把技能装进仓库。契约见 [`docs/CONTRACT.md`](docs/CONTRACT.md)。
 - **Claude Code** 用户也可以直接把本仓库当插件市场用：
@@ -27,7 +27,8 @@ catalog/bundles/<id>.yaml   套装：一次安装多个技能
 scripts/              校验 / 构建 / 安全扫描 / 同步工具（scripts/lib/ 为可测纯逻辑）
 test/                 工具的单元测试（node:test）；test/python/ 为共享 python 检查器的测试
 .claude-plugin/marketplace.json   Claude Code 插件市场清单（自动生成，勿手改）
-docs/CONTRACT.md      index.json 与迁移计划的对外契约
+docs/CONTRACT.md      index.json 的对外契约
+docs/migration/       PaperBell 4.6.1 → 5.0.3 手工迁移说明（AI 辅助版见 skills/paperbell-migrate）
 ```
 
 ### skill.yaml

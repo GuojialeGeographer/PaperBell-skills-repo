@@ -1,6 +1,0 @@
-filters:
-  and:
-    - file.inFolder("10 - Cards/Concepts")
-views:
-  - type: cards
-    name: 概念墙

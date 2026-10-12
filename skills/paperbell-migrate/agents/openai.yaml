@@ -1,0 +1,4 @@
+interface:
+  display_name: "PaperBell 分步迁移"
+  short_description: "逐步迁移 PaperBell 旧笔记，每步核对修改结果，确认后继续"
+  default_prompt: "使用 $paperbell-migrate 迁移我的旧笔记；先做第 0 步只读盘点，每步验证完成后等我确认再继续。"
